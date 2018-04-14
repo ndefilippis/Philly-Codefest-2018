@@ -4,8 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { MapComponent } from './map/map.component';
-import { ChatComponent } from './chat/chat.component';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { SignupScreenComponent } from './signup-screen/signup-screen.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   {path: 'chat', component: ChatComponent}
@@ -14,7 +15,9 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    LoginScreenComponent,
+    SignupScreenComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { } from '@types/googlemaps';
 
 @Component({
-  selector: 'map-display',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class MapComponent {
+export class DashboardComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
+
+  constructor() { }
 
   ngOnInit() {
     var mapProp = {
@@ -19,6 +21,4 @@ export class MapComponent {
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
   }
-
-
 }
