@@ -20,6 +20,15 @@ app.post('/login', (req, res) => {
     // if password is not in Firebase, don't grant permission but prompt to sign-up
     // save password in Firebase
   });
-})
+});
+
+app.get('/user/:username', (req, res) => {
+  let userName = req.params.username;
+  let userData;
+  // get data about user from Firebase
+  res.send(userData);
+});
+
+
 
 app.listen(3000);
