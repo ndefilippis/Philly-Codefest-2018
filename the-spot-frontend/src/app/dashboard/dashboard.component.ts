@@ -7,6 +7,12 @@ import { } from '@types/googlemaps';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
+//Fake event data
+/*export locations = [
+  {"lat": }
+]*/
+
 export class DashboardComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
