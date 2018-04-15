@@ -35,7 +35,16 @@ app.post('/login', (req, res) => {
     // check if password is already in Firebase; if it is, grant permission
     // if password is not in Firebase, don't grant permission but prompt to sign-up
   });
-})
+});
+
+app.get('/user/:username', (req, res) => {
+  let userName = req.params.username;
+  let userData;
+  // get data about user from Firebase
+  res.send(userData);
+});
+
+
 
 //signup
 app.post('/signup', (req, res) => {
