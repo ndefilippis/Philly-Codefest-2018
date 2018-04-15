@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'
+import { firebaseCreateAcc } from '../app.component'
 
 @Component({
   selector: 'app-signup-screen',
@@ -47,6 +48,7 @@ export class SignupScreenComponent implements OnInit {
       "age": (<HTMLInputElement>document.getElementById("age")).value,
       "gender": "Other"
     };
+	console.log(data.password);
     firebaseCreateAcc(data,
       () => {
         this.router.navigate([`../dashboard`], { relativeTo: this.route })

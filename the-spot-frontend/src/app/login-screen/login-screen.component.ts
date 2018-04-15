@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'
-
+import { firebaseAuth } from '../app.component'
 
 @Component({
   selector: 'app-login-screen',
