@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
+import { Router, ActivatedRoute } from '@angular/router'
+import { firebaseAuth } from '../app.component'
 
 @Component({
   selector: 'app-login-screen',
@@ -17,12 +18,28 @@ export class LoginScreenComponent implements OnInit {
   // For hiding password in pwd field
   public hide = true;
 
-  
 
-  constructor() { }
+
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    
+
+  }
+
+  goToSignUp(){
+    this.router.navigate([`../signup`], { relativeTo: this.route });
+  }
+
+  login(){
+    var email = (<HTMLInputElement>document.getElementById("username")).value;
+    var password = (<HTMLInputElement>document.getElementById("password")).value;
+    firebaseAuth(email, password,
+      () => {
+        this.router.navigate([`../dashboard`], { relativeTo: this.route });
+      },
+      () => {
+        this.router.navigate([`../`], { relativeTo: this.route });
+      })
   }
 
 }

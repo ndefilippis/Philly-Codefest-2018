@@ -3,19 +3,19 @@
         <h1 style="text-align: center;">The Spot</h1>
     </div>
     <div class="container">
-        <mat-form-field class="example-full-width" >
-                <textarea matInput placeholder="Enter your username"></textarea>
+        <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="Enter your username" id="username"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                <input matInput placeholder="Enter your password" id="password" [type]="hide ? 'password' : 'text'">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
         </mat-form-field>
     </div>
     <div class="container">
-        <button mat-raised-button color="primary" style="width: 48%; float: left; margin-right: 1%">Sign Up</button>
-        <button mat-raised-button color="warn" style="width: 48%; margin-left: 1%;">Login!</button>       
+        <button mat-raised-button color="primary" style="width: 48%; float: left; margin-right: 1%" (click)="goToSignUp()">Sign Up</button>
+        <button mat-raised-button color="warn" style="width: 48%; margin-left: 1%;" (click)="login()">Login!</button>
     </div>
     <div class="container" style="margin-top: 8%; width: 200% !important; display: block;">
-            <button mat-raised-button color="blue" style="width: 50%; float: left;">Forgot Password</button>
+            <button mat-raised-button color="blue" style="width: 50%; float: left;" onclick="resetPwd()">Forgot Password</button>
      </div>
 </mat-card>
