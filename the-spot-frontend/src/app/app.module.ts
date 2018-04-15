@@ -15,6 +15,8 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { RatePlaceComponent } from './rate-place/rate-place.component';
+import { SiteMapComponent } from './site-map/site-map.component';
 
 
 @NgModule({
@@ -22,7 +24,11 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     AppComponent,
     LoginScreenComponent,
     SignupScreenComponent,
-    DashboardComponent
+    RatePlaceComponent,
+    SignupScreenComponent,
+    DashboardComponent,
+    DashboardComponent,
+    SiteMapComponent
     
 
   ],
