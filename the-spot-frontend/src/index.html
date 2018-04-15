@@ -8,6 +8,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB8ZVOtVRAEa6fRjP4qHjWE_mHpkblxcYw"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
+<script>
+var config = {
+  apiKey: "AIzaSyADNZ1IAS8asFKdYoHD3VxQgB5M2L5D3xk",
+  authDomain: "the-spot-philly-codefest.firebaseapp.com",
+  databaseURL: "https://the-spot-philly-codefest.firebaseio.com",
+  projectId: "the-spot-philly-codefest",
+  storageBucket: "the-spot-philly-codefest.appspot.com",
+  messagingSenderId: "989646158505"
+};
+firebase.initializeApp(config);
+var db = firebase.firestore();
+//consider modifying state persistence here
+function createAcc(){
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("pwd").value;
+  var rPassword = document.getElementById("rpwd").value;
+  var name = document.getElementById("name").value;
+  var bday = document.getElementById("bday").value;
+  if (password != rPassword) {
+    console.log("Error! Passwords do not match.");
+  } else {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(function() {
+      console.log("User created");
+      db.collection("users").add({
+        name: name,
+        email: email,
+        bday: bday
+        //add gender field
+      });
+      var user = firebase.auth().currentUser;
+      user.updateProfile({
+        displayName: name,
+        email: email
+      }).then(function() {
+        console.log("User settings updated");
+      }).catch(function(error) {
+        console.log("Error in setting user fields: ", error.code);
+      });
+      //load into main screen
+    })
+    .catch(function(error) {
+      console.log("Error creating account: ", error.code);
+    });
+  }
+}
+function login(){
+  var email = document.getElementById("exampleDropdownFormEmail1").value;
+  var password = document.getElementById("exampleDropdownFormPassword1").value;
+  firebase.auth().signInWithEmailAndPassword(email, password)
+  .then(function() {
+    console.log("Success");
+    //Load in main pages
+  })
+  .catch(function(error) {
+    console.log("Error logging in: ", error.code);
+  });
+}
+
+function resetPwd(){
+  var email = document.getElementById("exampleDropdownFormEmail1").value;
+  firebase.auth().sendPasswordResetEmail(email).then(function() {
+    console.log("Sent email");
+  }).catch(function(error) {
+    console.log("Error resetting password: ", error.code);
+  });
+}
+</script>
 </head>
 <body>
   <app-root></app-root>
