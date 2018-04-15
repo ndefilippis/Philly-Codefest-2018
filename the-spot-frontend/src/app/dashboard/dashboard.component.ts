@@ -35,22 +35,39 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
-    var myLatLng = {lat: 19.956376, lng: -105.190738};
-
+    var myLatLng = {lat: 39.95670, lng: -75.19067};
     
     var mapProp = {
       center: new google.maps.LatLng(39.95670, -75.19067),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
+    var markerContent = '<div style = "width: 250px"><div name="Name" style="color: red; font-weight: bold;font-size:17px"> Philly{CODEFEST} </div>'+
+    	'<div name="location"> DASKALAKIS ATHLETIC CENTER\nDREXEL UNIVERSITY, PHILADELPHIA, PA</div>'+
+	'<div style = "text-align:left; font-size:15px" name = "rating">'+
+	'<img style="width: 15px; height: 15px" src="/assets/star.svg"></img>'+
+	'<img style="width: 15px; height: 15px" src="/assets/star.svg"></img>'+
+	'<img style="width: 15px; height: 15px" src="/assets/star.svg"></img>'+
+	'<img style="width: 15px; height: 15px" src="/assets/star.svg"></img>'+
+	'<img style="width: 15px; height: 15px" src="/assets/star.svg"></img>'+
+	'4.7/5.0</div></div>';
+
+    var infowindow = new google.maps.InfoWindow({
+    	content: markerContent,
+    });
+
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 
     var marker = new google.maps.Marker({
       position: myLatLng,
-      map: this.map,
-      title: 'Hello World!'
+      map: this.map ,
+      title: 'CodeFest'
     });
+    marker.addListener('click', x => {infowindow.open(this.map, marker);});
   }
 }
