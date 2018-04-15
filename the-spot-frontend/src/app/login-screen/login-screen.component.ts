@@ -1,29 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Http } from '@angular/http';
+import { FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router'
+
+  function firebaseAuth(email, password, zuccCallback, fuckCallback){
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(function() {
+      console.log("Success");
+      zuccCallback()
+    })
+    .catch(function(error) {
+      console.log("Error logging in: ", error.code);
+      fuckCallback();
+    });
+  }
+
 
 @Component({
   selector: 'app-login-screen',
   templateUrl: './login-screen.component.html',
   styleUrls: ['./login-screen.component.css']
 })
-
 export class LoginScreenComponent implements OnInit {
 
-  constructor(private router: Router, private http: Http, private route: ActivatedRoute) { }
+  public emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  // For hiding password in pwd field
+  public hide = true;
+
+
+
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
   }
 
-  login(data) {
-    this.http.post('10.250.98.231:3000/login', data).subscribe(res => {
-      console.log(res);
-      if(res.status == 301){
-        this.router.navigate([`../dashboard`], {relativeTo: this.route});
-      }
-      else{
-        this.router.navigate([`../login`], {relativeTo: this.route});
-      }
-    })
+  goToSignUp(){
+    this.router.navigate([`../signup`], { relativeTo: this.route });
   }
+
+  login(){
+    var email = (<HTMLInputElement>document.getElementById("username")).value;
+    var password = (<HTMLInputElement>document.getElementById("password")).value;
+    firebaseAuth(email, password,
+      () => {
+        this.router.navigate([`../dashboard`], { relativeTo: this.route });
+      },
+      () => {
+        this.router.navigate([`../`], { relativeTo: this.route });
+      })
+  }
+
 }

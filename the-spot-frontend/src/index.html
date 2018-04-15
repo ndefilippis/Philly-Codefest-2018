@@ -10,35 +10,35 @@
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB8ZVOtVRAEa6fRjP4qHjWE_mHpkblxcYw"></script>
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
-<script>
-var config = {
-  apiKey: "AIzaSyADNZ1IAS8asFKdYoHD3VxQgB5M2L5D3xk",
-  authDomain: "the-spot-philly-codefest.firebaseapp.com",
-  databaseURL: "https://the-spot-philly-codefest.firebaseio.com",
-  projectId: "the-spot-philly-codefest",
-  storageBucket: "the-spot-philly-codefest.appspot.com",
-  messagingSenderId: "989646158505"
-};
-firebase.initializeApp(config);
-var db = firebase.firestore();
-//consider modifying state persistence here
-function createAcc(){
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("pwd").value;
-  var rPassword = document.getElementById("rpwd").value;
-  var name = document.getElementById("name").value;
-  var bday = document.getElementById("bday").value;
-  if (password != rPassword) {
-    console.log("Error! Passwords do not match.");
-  } else {
+  <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script>
+  var config = {
+    apiKey: "AIzaSyADNZ1IAS8asFKdYoHD3VxQgB5M2L5D3xk",
+    authDomain: "the-spot-philly-codefest.firebaseapp.com",
+    databaseURL: "https://the-spot-philly-codefest.firebaseio.com",
+    projectId: "the-spot-philly-codefest",
+    storageBucket: "the-spot-philly-codefest.appspot.com",
+    messagingSenderId: "989646158505"
+  };
+  firebase.initializeApp(config);
+  var db = firebase.firestore();
+  //consider modifying state persistence here
+  
+  function firebaseCreateAcc(data, zucc, fuck){
+    var email = data.email;
+    var password = data.password;
+    var name = data.name;
+    var age = data.age;
+    var gender = data.gender;
+
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(function() {
       console.log("User created");
       db.collection("users").add({
         name: name,
         email: email,
-        bday: bday
-        //add gender field
+        age: age,
+        gender: gender
       });
       var user = firebase.auth().currentUser;
       user.updateProfile({
@@ -46,40 +46,39 @@ function createAcc(){
         email: email
       }).then(function() {
         console.log("User settings updated");
+        zucc()
       }).catch(function(error) {
         console.log("Error in setting user fields: ", error.code);
+        fuck();
       });
-      //load into main screen
+      //load into main screen here
     })
     .catch(function(error) {
       console.log("Error creating account: ", error.code);
     });
   }
-}
-function login(){
-  var email = document.getElementById("exampleDropdownFormEmail1").value;
-  var password = document.getElementById("exampleDropdownFormPassword1").value;
-  firebase.auth().signInWithEmailAndPassword(email, password)
-  .then(function() {
-    console.log("Success");
-    //Load in main pages
-  })
-  .catch(function(error) {
-    console.log("Error logging in: ", error.code);
-  });
-}
-
-function resetPwd(){
-  var email = document.getElementById("exampleDropdownFormEmail1").value;
-  firebase.auth().sendPasswordResetEmail(email).then(function() {
-    console.log("Sent email");
-  }).catch(function(error) {
-    console.log("Error resetting password: ", error.code);
-  });
-}
-</script>
+  function firebaseAuth(email, password, zuccCallback, fuckCallback){
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(function() {
+      console.log("Success");
+      zuccCallback()
+    })
+    .catch(function(error) {
+      console.log("Error logging in: ", error.code);
+      fuckCallback();
+    });
+  }
+  function resetPwd(){
+    var email = document.getElementById("username").value;
+    firebase.auth().sendPasswordResetEmail(email).then(function() {
+      console.log("Sent email");
+    }).catch(function(error) {
+      console.log("Error resetting password: ", error.code);
+    });
+  }
+  </script>
 </head>
-<body>
+<body style="background-color: rgb(79,167,142)">
   <app-root></app-root>
 </body>
 </html>

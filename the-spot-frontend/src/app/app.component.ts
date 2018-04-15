@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,10 @@ import { } from '@types/googlemaps';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   ngOnInit() {
+   
   }
+
+
 }

@@ -1,10 +1,9 @@
-h1{
-  font-family: sans-serif;
-}
-
-#signup-container {
-  margin: auto;
-  width: 150px;
-  text-align: center;
-  display: block;
-}
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }

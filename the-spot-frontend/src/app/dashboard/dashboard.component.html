@@ -1,1 +1,18 @@
-<div #gmap style="width:100%;height:800px"></div>
+
+
+<mat-sidenav-container
+    class="example-container" (backdropClick)="close('backdrop')">
+  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
+    <p><button mat-button (click)="close('toggle button')">Home</button></p>
+    <p><button mat-button (click)="close('toggle button')">Search</button></p>
+    <p><button mat-button (click)="close('toggle button')">Profile</button></p>
+    <p><button mat-button (click)="close('toggle button')">EMERGENCY</button></p>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p>
+      <svg-icon (click)="sidenav.open()" style="margin-left: 5%" src="/assets/burger.svg"></svg-icon>
+    </p>
+    <div #gmap style="width:100%;height:800px"></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
