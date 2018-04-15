@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { } from '@types/googlemaps';
 import {MatSidenav} from '@angular/material/sidenav';
+import { Router, ActivatedRoute } from '@angular/router'
+
 
 
 @Component({
@@ -32,7 +34,16 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
+  goToRate(){
+    this.router.navigate([`../rate`], { relativeTo: this.route });
+  }
+
+  goToEmerg(){
+    this.router.navigate([`../siteMap`], { relativeTo: this.route });
+  }
+
 
   ngOnInit() {
     var myLatLng = {
@@ -51,7 +62,7 @@ export class DashboardComponent implements OnInit {
     
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 
-    var codefestContent = '<div style = "width: 250px"><div name="Name" style="color: red; font-weight: bold;font-size:17px"> Philly{CODEFEST} </div>'+
+    var codefestContent = '<div style = "width: 250px"><button onclick="window.location.href=\'/codefest\'" name="Name" style="color: red; font-weight: bold;font-size:17px"> Philly{CODEFEST} </button>'+
     	'<div name="location"> DASKALAKIS ATHLETIC CENTER\nDREXEL UNIVERSITY, PHILADELPHIA, PA</div>'+
 	'<div style = "text-align:left; font-size:15px" name = "rating">'+
 	'<img style="width: 15px; height: 15px" src="/assets/star.svg"></img>'+
@@ -62,7 +73,7 @@ export class DashboardComponent implements OnInit {
 	'4.7/5.0</div>'+
 	'<a href="https://typescript-chat.firebaseapp.com/"> Codefest Chat </a></div>';
 
-    var mikesContent = '<div style = "width: 250px"><div name="Name" style="color: red; font-weight: bold;font-size:17px"> Mike\'s House Party </div>'+
+    var mikesContent = '<div style = "width: 250px"><button onclick="window.location.href=\'/mike\'" name="Name" style="color: red; font-weight: bold;font-size:17px"> Mike\'s House Party </button>'+
     	'<div name="location"> 3741 Baring Street, Philadelphia, PA</div>'+
 	'<div style = "text-align:left; font-size:15px" name = "rating">'+
 	'<img style="width: 15px; height: 15px" src="/assets/star.svg"></img>'+
@@ -83,7 +94,7 @@ export class DashboardComponent implements OnInit {
 	'4.1/5.0</div>'+
 	'<a href="https://typescript-chat.firebaseapp.com/"> World Cafe Live Chat </a></div>';
 
-    var landmarkContent = '<div style = "width: 250px"><div name="Name" style="color: red; font-weight: bold;font-size:17px"> Landmark </div>'+
+    var landmarkContent = '<div style = "width: 250px"><button onclick="window.location.href=\'/landmark\'" name="Name" style="color: red; font-weight: bold;font-size:17px"> Landmark </button>'+
     	'<div name="location"> DASKALAKIS ATHLETIC CENTER\nDREXEL UNIVERSITY, PHILADELPHIA, PA</div>'+
 	'<div style = "text-align:left; font-size:15px" name = "rating">'+
 	'<img style="width: 15px; height: 15px" src="/assets/star.svg"></img>'+

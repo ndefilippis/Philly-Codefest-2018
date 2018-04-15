@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router'
+
 
 @Component({
   selector: 'app-codefest-description',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodefestDescriptionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
+  goToEmerg(){
+    this.router.navigate([`../siteMap`], { relativeTo: this.route });
+  }
 
   ngOnInit() {
   }
