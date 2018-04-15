@@ -1,16 +1,24 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+
 const app = express();
 
 app.use(express.json());
+app.use(authCheck);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+const config = {
+  apiKey: "AIzaSyADNZ1IAS8asFKdYoHD3VxQgB5M2L5D3xk",
+  authDomain: "the-spot-philly-codefest.firebaseapp.com",
+  databaseURL: "https://the-spot-philly-codefest.firebaseio.com",
+  projectId: "the-spot-philly-codefest",
+  storageBucket: "the-spot-philly-codefest.appspot.com",
+  messagingSenderId: "989646158505"
+};
+firebase.initializeApp(config);
 
 app.post('/login', (req, res) => {
-  let userName = req.body.userName;
-  let password = req.body.password;
+  const userName = req.body.userName;
+  const password = req.body.password;
   bcrypt.hash(password, 3, (err, hash) => {
     if(err) {
       res.send(err);
@@ -21,35 +29,56 @@ app.post('/login', (req, res) => {
   });
 });
 
-app.get('/user/:username', (req, res) => {
-  let userName = req.params.username;
-  let userData;
-  // get data about user from Firebase
-  res.send(userData);
-});
-
-
-
-//signup
 app.post('/signup', (req, res) => {
-  let name = req.body.name;
-  let birthDate = req.body.birthDate;
-  let sex = req.body.sex;
-  let userName = req.body.userName;
-  let password = req.body.password;
+  const name = req.body.name;
+  const birthDate = req.body.birthDate;
+  const sex = req.body.sex;
+  const userName = req.body.userName;
+  const password = req.body.password;
 
   bcrypt.hash(password, , 3, (err, hash) => {
     if(err) {
       res.send(err);
     }
-    res.send(`name: ${name}, sex: ${sex}, FirthDate: ${birthDate}, userName: ${userName}, hash: ${hash}`);
+    res.send(`User ${name} successfully signed up`);
 
     //check user name is not taken
-    //check password is complex enough?
     //log in?
   });
-  
 }
-//
+
+app.get('/user/:username', (req, res) => {
+  let userName = req.params.userName;
+  let userData;
+  // get data about user from Firebase
+  res.send(userData);
+});
+
+app.post('/shooting/:location', (req, res) => {
+  const { latitude, longitude } = req.body.location;
+  // save status for that location as shooting
+  res.send(`Shooting has been reported at ${latitude}, ${longitude}`);
+});
+
+app.get('/events', (req, res) => {
+  const { latitude, longitude } = req.body.location;
+  // get nearby events from Firebase
+});
+
+app.post('/rate', (req, res) => {
+  const { latitude, longitude } = req.body.location;
+  const rating = req.body.rating;
+  // get current rating for that venue from database
+  // update overall rating => average
+});
+
+const authCheck = (req, res, next) => {
+  const status = req.get("auth");
+  if(status) {
+    next();
+  } else {
+    res.status(401).send('Please log in or sign up first');
+  }
+}
 
 app.listen(3000);
