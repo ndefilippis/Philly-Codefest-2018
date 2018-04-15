@@ -4,29 +4,29 @@
     </div>
     <div class="container">
         <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="Enter your name"></textarea>
+                <textarea matInput placeholder="Enter your name" id="name"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="Enter your email"></textarea>
+                <textarea matInput placeholder="Enter your email" id="email"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="Enter your prefered age"></textarea>
+                <textarea matInput placeholder="Enter your prefered age" id="age"></textarea>
         </mat-form-field>
-        
+
         <mat-form-field class="example-full-width">
             <mat-select placeholder="Preferred Gender">
-                <mat-option *ngFor="let food of foods" [value]="food.value">
+                <mat-option *ngFor="let food of foods" [value]="food.viewValue">
                 {{ food.viewValue }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                <input matInput placeholder="Enter your password" id="pwd" [type]="hide ? 'password' : 'text'">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
         </mat-form-field>
     </div>
     <div class="container" style="margin-top: 5%; width: 200% !important; display: block;">
-            <button mat-raised-button color="primary" style="width: 50%; float: left;">Forgot Password</button>
+            <button mat-raised-button color="primary" style="width: 50%; float: left;" (click)="createAcc()">Sign Up</button>
      </div>
 </mat-card>

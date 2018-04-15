@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-signup-screen',
@@ -34,9 +34,26 @@ export class SignupScreenComponent implements OnInit {
   public hide = true;
 
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+  }
+
+  createAcc(){
+    var data = {}
+    data.email = document.getElementById("email").value;
+    data.password = document.getElementById("pwd").value;
+    data.name = document.getElementById("name").value;
+    data.age = document.getElementById("age").value;
+    data.gender = 'Other';
+    firebaseCreateAcc(data,
+      () => {
+        this.router.navigate([`../dashboard`], { relativeTo: this.route })
+      },
+      () => {
+        this.router.navigate([`../signup`], { relativeTo: this.route })
+      }
+    )
   }
 
 }
