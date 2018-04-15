@@ -37,10 +37,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     var myLatLng = {
     codefest:{lat: 39.95670, lng: -75.19067},
-    mikes:{lat: 38.95670, lng: -75.19067},
-    world:{lat: 37.95670, lng: -75.19067},
-    landmark:{lat: 36.95670, lng: -75.19067},
-    sabrinas:{lat: 35.95670, lng: -75.19067},    
+    mikes:{lat: 39.960970, lng: -75.196795},
+    world:{lat: 39.952159, lng: -75.184960},
+    landmark:{lat: 39.955986, lng: -75.190663},
+    sabrinas:{lat: 39.960035, lng: -75.190716},    
     };
     
     var mapProp = {
