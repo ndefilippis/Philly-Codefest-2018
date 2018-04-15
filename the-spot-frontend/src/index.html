@@ -21,6 +21,31 @@ var config = {
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
+function createAcc(){
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("pwd").value;
+  var rPassword = document.getElementById("rpwd").value;
+  var name = document.getElementById("name").value;
+  var bday = document.getElementById("bday").value;
+  if (password != rPassword) {
+    console.log("Error! Passwords do not match.");
+  } else {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(function(success) {
+      console.log("User created");
+      db.collection("users").add({
+        name: name,
+        email: email,
+        bday: bday
+        //add gender field
+      });
+      //load into main screen
+    })
+    .catch(function(error) {
+      console.log("Error creating account: ", error);
+    });
+  }
+}
 function login(){
   var email = document.getElementById("exampleDropdownFormEmail1").value;
   var password = document.getElementById("exampleDropdownFormPassword1").value;

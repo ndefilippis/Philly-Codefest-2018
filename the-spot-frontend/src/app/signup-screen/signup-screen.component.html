@@ -2,10 +2,10 @@
 <h1> Sign up!</h1>
 <form class="signup-form">
   <mat-form-field>
-    <input type="text" matInput placeholder="Name">
+    <input type="text" matInput placeholder="Name" id="name">
   </mat-form-field>
   <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Date of Birth">
+    <input matInput [matDatepicker]="picker" placeholder="Date of Birth" id="bday">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
@@ -17,14 +17,14 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <input type="text" matInput placeholder="Username">
+    <input type="text" matInput placeholder="Email" id="email">
   </mat-form-field>
   <mat-form-field>
-    <input type="password" matInput placeholder="Password">
+    <input type="password" matInput placeholder="Password" id="pwd">
   </mat-form-field>
   <mat-form-field>
-    <input type="password" matInput placeholder="Re-type Password">
+    <input type="password" matInput placeholder="Re-type Password" id="rpwd">
   </mat-form-field>
-  <button mat-button-raised>Submit!</button>
+  <button mat-button-raised onclick="createAcc()">Submit!</button>
 </form>
 </div>
