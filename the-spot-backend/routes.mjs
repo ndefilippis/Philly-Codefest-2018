@@ -1,5 +1,20 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import firebase from 'firebase';
+
+//modify
+var config = {
+   apiKey: "AIzaSyADNZ1IAS8asFKdYoHD3VxQgB5M2L5D3xk",
+   authDomain: "the-spot-philly-codefest.firebaseapp.com",
+   databaseURL: "https://the-spot-philly-codefest.firebaseio.com",
+   projectId: "the-spot-philly-codefest",
+   storageBucket: "the-spot-philly-codefest.appspot.com",
+   messagingSenderId: "989646158505"
+};
+
+admin.initializeApp(config);
+// add path to data
+const users = firebase.database().ref('');
 
 const app = express();
 
@@ -30,22 +45,30 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/signup', (req, res) => {
-  const name = req.body.name;
-  const birthDate = req.body.birthDate;
-  const sex = req.body.sex;
-  const userName = req.body.userName;
-  const password = req.body.password;
-
-  bcrypt.hash(password, , 3, (err, hash) => {
+  let data = {
+      name: req.body.name,
+      birthDate = req.body.birthDay,
+      sex: req.body.sex,
+      userName: req.body.userName,
+      password: req.body.password,
+  }
+  bcrypt.hash(data.password, , 3, (err, hash) => {
     if(err) {
       res.send(err);
     }
-    res.send(`User ${name} successfully signed up`);
-
     //check user name is not taken
     //log in?
+    users.push({
+	    "name":data.name,
+    	"birthday":data.birthDay,
+    	"sex":data.sex,
+    	"username": data.userName,
+    	"password":hash
+    });
+    res.send(`User ${data.name} successfully signed up`);
   });
-}
+});
+
 
 app.get('/user/:username', (req, res) => {
   let userName = req.params.userName;
