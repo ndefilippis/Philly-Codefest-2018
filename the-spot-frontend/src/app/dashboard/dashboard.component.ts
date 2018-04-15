@@ -45,12 +45,12 @@ export class DashboardComponent implements OnInit {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
     var marker = new google.maps.Marker({
       position: myLatLng,
-      map: this.gmapElement ,
+      map: this.map,
       title: 'Hello World!'
     });
-
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
   }
 }
