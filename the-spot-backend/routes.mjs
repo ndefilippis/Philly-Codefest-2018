@@ -21,16 +21,6 @@ const app = express();
 app.use(express.json());
 app.use(authCheck);
 
-const config = {
-  apiKey: "AIzaSyADNZ1IAS8asFKdYoHD3VxQgB5M2L5D3xk",
-  authDomain: "the-spot-philly-codefest.firebaseapp.com",
-  databaseURL: "https://the-spot-philly-codefest.firebaseio.com",
-  projectId: "the-spot-philly-codefest",
-  storageBucket: "the-spot-philly-codefest.appspot.com",
-  messagingSenderId: "989646158505"
-};
-firebase.initializeApp(config);
-
 app.post('/login', (req, res) => {
   const userName = req.body.userName;
   const password = req.body.password;
@@ -58,8 +48,8 @@ app.post('/signup', (req, res) => {
     }
     //check user name is not taken
     //log in?
-    users.push({
-	    "name":data.name,
+    users.once.push({
+        "name":data.name,
     	"birthday":data.birthDay,
     	"sex":data.sex,
     	"username": data.userName,
