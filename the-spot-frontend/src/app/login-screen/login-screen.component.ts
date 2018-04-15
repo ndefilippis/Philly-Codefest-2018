@@ -31,8 +31,8 @@ export class LoginScreenComponent implements OnInit {
   }
 
   login(){
-    var email = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+    var email = (<HTMLInputElement>document.getElementById("username")).value;
+    var password = (<HTMLInputElement>document.getElementById("password")).value;
     firebaseAuth(email, password,
       () => {
         this.router.navigate([`../dashboard`], { relativeTo: this.route });

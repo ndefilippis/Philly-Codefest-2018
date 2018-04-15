@@ -40,12 +40,13 @@ export class SignupScreenComponent implements OnInit {
   }
 
   createAcc(){
-    var data = {}
-    data.email = (<HTMLInputElement>document.getElementById("email")).value;
-    data.password = (<HTMLInputElement>document.getElementById("pwd")).value;
-    data.name = (<HTMLInputElement>document.getElementById("name")).value;
-    data.age = (<HTMLInputElement>document.getElementById("age")).value;
-    data.gender = 'Other';
+    var data = {
+      "email": (<HTMLInputElement>document.getElementById("email")).value,
+      "password": (<HTMLInputElement>document.getElementById("pwd")).value,
+      "name": (<HTMLInputElement>document.getElementById("name")).value,
+      "age": (<HTMLInputElement>document.getElementById("age")).value,
+      "gender": "Other"
+    };
     firebaseCreateAcc(data,
       () => {
         this.router.navigate([`../dashboard`], { relativeTo: this.route })
