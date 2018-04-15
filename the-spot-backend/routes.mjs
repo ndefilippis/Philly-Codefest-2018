@@ -1,20 +1,13 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import firebase from 'firebase';
+import Firestore from '@google-cloud/firestore';
 
-//modify
-var config = {
-   apiKey: "AIzaSyADNZ1IAS8asFKdYoHD3VxQgB5M2L5D3xk",
-   authDomain: "the-spot-philly-codefest.firebaseapp.com",
-   databaseURL: "https://the-spot-philly-codefest.firebaseio.com",
-   projectId: "the-spot-philly-codefest",
-   storageBucket: "the-spot-philly-codefest.appspot.com",
-   messagingSenderId: "989646158505"
-};
+const firestore = new Firestore({
+  projectId: 'the-spot-philly-codefest'
+})
 
 admin.initializeApp(config);
-// add path to data
-const users = firebase.database().ref('');
+const db = firebase.database().ref('/');
 
 const app = express();
 
@@ -38,7 +31,7 @@ app.post('/login', (req, res) => {
     if(err) {
       res.send(err);
     }
-    res.send(`userName: ${userName}, hash: ${hash}`);
+    res.status(301).send('Successfully loged in');
     // check if password is already in Firebase; if it is, grant permission
     // if password is not in Firebase, don't grant permission but prompt to sign-up
   });
@@ -52,7 +45,7 @@ app.post('/signup', (req, res) => {
       userName: req.body.userName,
       password: req.body.password,
   }
-  bcrypt.hash(data.password, , 3, (err, hash) => {
+  bcrypt.hash(data.password, 3, (err, hash) => {
     if(err) {
       res.send(err);
     }
@@ -63,7 +56,7 @@ app.post('/signup', (req, res) => {
     	"birthday":data.birthDay,
     	"sex":data.sex,
     	"username": data.userName,
-    	"password":hash
+    	"password": hash
     });
     res.send(`User ${data.name} successfully signed up`);
   });
