@@ -17,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { RatePlaceComponent } from './rate-place/rate-place.component';
 import { SiteMapComponent } from './site-map/site-map.component';
+import { CodefestDescriptionComponent } from './codefest-description/codefest-description.component';
+import { LandmarkDescriptionComponent } from './landmark-description/landmark-description.component';
+import { MikeHousePartyDescriptionComponent } from './mike-house-party-description/mike-house-party-description.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { SiteMapComponent } from './site-map/site-map.component';
     SignupScreenComponent,
     DashboardComponent,
     DashboardComponent,
-    SiteMapComponent
+    SiteMapComponent,
+    CodefestDescriptionComponent,
+    LandmarkDescriptionComponent,
+    MikeHousePartyDescriptionComponent
     
 
   ],

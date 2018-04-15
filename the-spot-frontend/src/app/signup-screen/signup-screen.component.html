@@ -10,11 +10,11 @@
                 <textarea matInput placeholder="Enter your email" id="email"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="Enter your prefered age" id="age"></textarea>
+                <textarea matInput placeholder="Enter your age" id="age"></textarea>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <mat-select placeholder="Preferred Gender">
+            <mat-select placeholder="Gender">
                 <mat-option *ngFor="let food of foods" [value]="food.viewValue">
                 {{ food.viewValue }}
                 </mat-option>
