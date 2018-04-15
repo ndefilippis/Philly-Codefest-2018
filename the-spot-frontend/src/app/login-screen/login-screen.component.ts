@@ -38,7 +38,7 @@ export class LoginScreenComponent implements OnInit {
         this.router.navigate([`../dashboard`], { relativeTo: this.route });
       },
       () => {
-        this.router.navigate([`../login`], { relativeTo: this.route });
+        this.router.navigate([`../`], { relativeTo: this.route });
       })
   }
 

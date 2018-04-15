@@ -41,10 +41,10 @@ export class SignupScreenComponent implements OnInit {
 
   createAcc(){
     var data = {}
-    data.email = document.getElementById("email").value;
-    data.password = document.getElementById("pwd").value;
-    data.name = document.getElementById("name").value;
-    data.age = document.getElementById("age").value;
+    data.email = (<HTMLInputElement>document.getElementById("email")).value;
+    data.password = (<HTMLInputElement>document.getElementById("pwd")).value;
+    data.name = (<HTMLInputElement>document.getElementById("name")).value;
+    data.age = (<HTMLInputElement>document.getElementById("age")).value;
     data.gender = 'Other';
     firebaseCreateAcc(data,
       () => {
