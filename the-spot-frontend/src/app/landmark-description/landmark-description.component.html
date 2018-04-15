@@ -1,3 +1,26 @@
-<p>
-  landmark-description works!
-</p>
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title><h2 style="color: red;">Landmark Bar</h2></mat-card-title>
+      <mat-card-subtitle>Philadelphia</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="../../assets/hack.JPG" alt="Hackathon Photo">
+    <mat-card-content>
+      <p>
+          Landmark Worldwide (formerly Landmark Education), or simply Landmark, is a company offering personal development programs, headquartered in San Francisco.
+          The current company started with the licensing of rights to use intellectual property owned by Werner Erhard, author of the est (Erhard Seminars Training). Landmark has developed and delivered multiple follow-up and additional programs. Its subsidiary, the Vanto Group, also markets and delivers training and consulting to organizations.      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Like</button>
+      <button mat-button>Share</button>
+      <button mat-button style="float: right;">Site Map</button>
+    </mat-card-actions>
+  </mat-card>
+
+<mat-card class="example-card" style="margin-top: 5%;">
+  <h2 style="color:mediumvioletred; text-align: center;">The Concensus</h2>
+
+  <mat-slider style="width:100%;" min="1" max="5" step=".01" thumbLabel></mat-slider>
+  
+  <button mat-raised-button (click)="alertify()" color="primary" style="width: 20%; text-align:center !important; display: block; margin-left: 40%; margin-right: 40%;">Submit</button>
+
+</mat-card>
