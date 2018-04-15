@@ -59,11 +59,19 @@ export class DashboardComponent implements OnInit {
     	content: markerContent,
     });
 
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
     var marker = new google.maps.Marker({
       position: myLatLng,
+<<<<<<< HEAD
       map: this.map ,
       title: 'CodeFest'
     });
     marker.addListener('click', x => {infowindow.open(this.map, marker);});
+=======
+      map: this.map,
+      title: 'Hello World!'
+    });
+>>>>>>> e634908c91aff5f9d7e79ca311ba0225f87129c3
   }
 }

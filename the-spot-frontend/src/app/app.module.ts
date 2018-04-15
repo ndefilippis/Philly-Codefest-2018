@@ -23,6 +23,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     LoginScreenComponent,
     SignupScreenComponent,
     DashboardComponent
+    
+
   ],
   imports: [
     BrowserModule,
