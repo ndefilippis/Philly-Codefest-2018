@@ -1,20 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
-
+import { Router, ActivatedRoute } from '@angular/router'
+import { firebaseAuth } from '../app.component'
 
 @Component({
   selector: 'app-login-screen',
   templateUrl: './login-screen.component.html',
-  styleUrls: ['./login-screen.component.css'],
-  providers: [AngularFireAuth]
+  styleUrls: ['./login-screen.component.css']
 })
-
 export class LoginScreenComponent implements OnInit {
 
   public emailFormControl = new FormControl('', [
@@ -27,13 +20,10 @@ export class LoginScreenComponent implements OnInit {
 
 
 
-  constructor(private afAuth: AngularFireAuth,
-              private db: AngularFireDatabase,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log("Here")
+
   }
 
   goToSignUp(){
@@ -43,36 +33,13 @@ export class LoginScreenComponent implements OnInit {
   login(){
     var email = (<HTMLInputElement>document.getElementById("username")).value;
     var password = (<HTMLInputElement>document.getElementById("password")).value;
-    this.firebaseAuth(email, password,
+    firebaseAuth(email, password,
       () => {
         this.router.navigate([`../dashboard`], { relativeTo: this.route });
       },
       () => {
         this.router.navigate([`../`], { relativeTo: this.route });
       })
-  }
-
-  firebaseAuth(email, password, zuccCallback, fuckCallback){
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .then(function() {
-      console.log("Success");
-      zuccCallback()
-    })
-    .catch(function(error) {
-      console.log("Error logging in: ", error.code);
-      fuckCallback();
-    });
-  }
-
-  resetPwd(){
-    var auth = firebase.auth();
-    var email = (<HTMLInputElement>document.getElementById("username")).value;
-    return auth.sendPasswordResetEmail(email)
-    .then(function() {
-      console.log("Sent email");
-    }).catch(function(error) {
-      console.log("Error resetting password: ", error.code);
-    });
   }
 
 }

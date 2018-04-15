@@ -15,10 +15,11 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from './../environments/environment';
-
+import { RatePlaceComponent } from './rate-place/rate-place.component';
+import { SiteMapComponent } from './site-map/site-map.component';
+import { CodefestDescriptionComponent } from './codefest-description/codefest-description.component';
+import { LandmarkDescriptionComponent } from './landmark-description/landmark-description.component';
+import { MikeHousePartyDescriptionComponent } from './mike-house-party-description/mike-house-party-description.component';
 
 
 @NgModule({
@@ -26,20 +27,28 @@ import { environment } from './../environments/environment';
     AppComponent,
     LoginScreenComponent,
     SignupScreenComponent,
-    DashboardComponent
+    RatePlaceComponent,
+    SignupScreenComponent,
+    DashboardComponent,
+    DashboardComponent,
+    SiteMapComponent,
+    CodefestDescriptionComponent,
+    LandmarkDescriptionComponent,
+    MikeHousePartyDescriptionComponent
+    
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(environment.firebase),
     MaterialModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    AngularSvgIconModule,
-    AngularFireDatabaseModule
+    HttpClientModule, 
+    AngularSvgIconModule
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
