@@ -1,46 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'
-
-  function firebaseCreateAcc(data, zucc, fuck){
-    var email = data.email;
-    var password = data.password;
-    var name = data.name;
-    var age = data.age;
-    var gender = data.gender;
-
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(function() {
-      console.log("User created");
-      db.collection("users").add({
-        name: name,
-        email: email,
-        age: age,
-        gender: gender
-      });
-      var user = firebase.auth().currentUser;
-      user.updateProfile({
-        displayName: name,
-        email: email
-      }).then(function() {
-        console.log("User settings updated");
-        zucc()
-      }).catch(function(error) {
-        console.log("Error in setting user fields: ", error.code);
-        fuck();
-      });
-      //load into main screen here
-    })
-    .catch(function(error) {
-      console.log("Error creating account: ", error.code);
-    });
-  }
-
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-signup-screen',
   templateUrl: './signup-screen.component.html',
-  styleUrls: ['./signup-screen.component.css']
+  styleUrls: ['./signup-screen.component.css'],
+  providers: [AngularFireAuth]
 })
 export class SignupScreenComponent implements OnInit {
 
@@ -69,7 +39,10 @@ export class SignupScreenComponent implements OnInit {
   public hide = true;
 
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private afAuth: AngularFireAuth,
+              private db: AngularFireDatabase,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -82,7 +55,7 @@ export class SignupScreenComponent implements OnInit {
       "age": (<HTMLInputElement>document.getElementById("age")).value,
       "gender": "Other"
     };
-    firebaseCreateAcc(data,
+    this.firebaseCreateAcc(data,
       () => {
         this.router.navigate([`../dashboard`], { relativeTo: this.route })
       },
@@ -92,4 +65,40 @@ export class SignupScreenComponent implements OnInit {
     )
   }
 
+  firebaseCreateAcc(data, zucc, fuck){
+    var email = data.email;
+    var password = data.password;
+    var name = data.name;
+    var age = data.age;
+    var gender = data.gender;
+
+    var users = this.db.list('users');
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then(function(user) {
+      console.log("User created");
+      users.push({
+        name: name,
+        email: email,
+        age: age,
+        gender: gender
+      });
+      /*var user: User = firebase.auth().currentUser;
+      user.updateProfile({
+        displayName: name,
+        email: email
+      }).then(function() {
+        console.log("User settings updated");
+        zucc()
+      }).catch(function(error) {
+        console.log("Error in setting user fields: ", error.code);
+        fuck();
+      });*/
+      //load into main screen here
+      zucc();
+    })
+    .catch(function(error) {
+      console.log("Error creating account: ", error);
+      fuck();
+    });
+  }
 }

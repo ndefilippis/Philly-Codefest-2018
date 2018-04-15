@@ -15,6 +15,10 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from './../environments/environment';
+
 
 
 @NgModule({
@@ -23,20 +27,19 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     LoginScreenComponent,
     SignupScreenComponent,
     DashboardComponent
-    
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpModule,
+    AngularFireModule.initializeApp(environment.firebase),
     MaterialModule,
     BrowserAnimationsModule,
-    HttpClientModule, 
-    AngularSvgIconModule
+    HttpClientModule,
+    AngularSvgIconModule,
+    AngularFireDatabaseModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
