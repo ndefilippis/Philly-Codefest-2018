@@ -1,0 +1,10 @@
+h1{
+  font-family: sans-serif;
+}
+
+#signup-container {
+  margin: auto;
+  width: 250px;
+  text-align: center;
+  display: block;
+}
